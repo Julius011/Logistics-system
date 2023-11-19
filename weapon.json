@@ -1,0 +1,56 @@
+[
+    {
+        "name": "",
+        "atk": {
+            "physical": 0,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 0
+        },
+        "def": {
+            "physical": 0,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "stab": 0
+        },
+        "durability": 0
+    },
+    {
+        "name": "Dagger",
+        "atk": {
+            "physical": 56,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 131
+        },
+        "def": {
+            "physical": 45,
+            "magic": 10,
+            "fire": 30,
+            "lightning": 30,
+            "stab": 26
+        },
+        "durability": 200
+    },
+    {
+        "name": "Ghost Blade",
+        "atk": {
+            "physical": 100,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0,
+            "bonus": 127
+        },
+        "def": {
+            "physical": 45,
+            "magic": 10,
+            "fire": 30,
+            "lightning": 30,
+            "stab": 26
+        },
+        "durability": 100
+    }
+]

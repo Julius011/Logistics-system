@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Naked",
+        "def": {
+            "physical": 0,
+            "strike": 0,
+            "slash": 0,
+            "thrust": 0,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0
+        },
+        "resist": {
+            "poise": 0,
+            "bleed": 0,
+            "poison": 0,
+            "curse": 0
+        },
+        "durability": 0,
+        "weight": 0
+    },
+    {
+        "name": "Gauntlets of the Vanquisher",
+        "def": {
+            "physical": 11,
+            "strike": 10.5,
+            "slash": 12.7,
+            "thrust": 11,
+            "magic": 7,
+            "fire": 7,
+            "lightning": 6
+        },
+        "resist": {
+            "poise": 4,
+            "bleed": 6,
+            "poison": 5,
+            "curse": 4
+        },
+        "durability": 500,
+        "weight": 3.0
+    },
+    {
+        "name": "Eastern Gauntlets",
+        "def": {
+            "physical": 9.3,
+            "strike": 8.8,
+            "slash": 11.5,
+            "thrust": 9,
+            "magic": 1.5,
+            "fire": 6.2,
+            "lightning": 3.1
+        },
+        "resist": {
+            "poise": 2,
+            "bleed": 6.4,
+            "poison": 5.1,
+            "curse": 0
+        },
+        "durability": 450,
+        "weight": 1.5
+    }
+]

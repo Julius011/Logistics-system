@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Naked",
+        "def": {
+            "physical": 0,
+            "strike": 0,
+            "slash": 0,
+            "thrust": 0,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0
+        },
+        "resist": {
+            "poise": 0,
+            "bleed": 0,
+            "poison": 0,
+            "curse": 0
+        },
+        "durability": 0,
+        "weight": 0
+    },
+    {
+        "name": "Helm of The Wise",
+        "def": {
+            "physical": 18,
+            "strike": 17.1,
+            "slash": 20.7,
+            "thrust": 18,
+            "magic": 12,
+            "fire": 13,
+            "lightning": 10
+        },
+        "resist": {
+            "poise": 8,
+            "bleed": 11,
+            "poison": 7,
+            "curse": 18
+        },
+        "durability": 500,
+        "weight": 5.1
+    },
+    {
+        "name": "Eastern Helm",
+        "def": {
+            "physical": 26.3,
+            "strike": 25,
+            "slash": 32.7,
+            "thrust": 25.6,
+            "magic": 9.3,
+            "fire": 18.6,
+            "lightning": 10.8
+        },
+        "resist": {
+            "poise": 8,
+            "bleed": 19.1,
+            "poison": 14,
+            "curse": 0
+        },
+        "durability": 450,
+        "weight": 4.7
+    }
+]

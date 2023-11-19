@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Naked",
+        "def": {
+            "physical": 0,
+            "strike": 0,
+            "slash": 0,
+            "thrust": 0,
+            "magic": 0,
+            "fire": 0,
+            "lightning": 0
+        },
+        "resist": {
+            "poise": 0,
+            "bleed": 0,
+            "poison": 0,
+            "curse": 0
+        },
+        "durability": 0,
+        "weight": 0
+    },
+    {
+        "name": "Armor of the Glorious",
+        "def": {
+            "physical": 47,
+            "strike": 44.6,
+            "slash": 54.1,
+            "thrust": 47,
+            "magic": 31,
+            "fire": 34,
+            "lightning": 25
+        },
+        "resist": {
+            "poise": 20,
+            "bleed": 28,
+            "poison": 19,
+            "curse": 24
+        },
+        "durability": 500,
+        "weight": 13.3
+    },
+    {
+        "name": "Eastern Armor",
+        "def": {
+            "physical": 69.8,
+            "strike": 66.3,
+            "slash": 86.5,
+            "thrust": 67.7,
+            "magic": 23.3,
+            "fire": 51.1,
+            "lightning": 27.9
+        },
+        "resist": {
+            "poise": 20,
+            "bleed": 48.3,
+            "poison": 35.6,
+            "curse": 0
+        },
+        "durability": 450,
+        "weight": 12.3,
+        "obtained": [
+            "Darkroot Garden, past the door locked with Crest of Artorias. "
+        ]
+    }
+]
