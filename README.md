@@ -9,7 +9,7 @@ Your task is to use Bun, Elysia and mongoose to create an API that can answer as
 
 Key questions - checklist:
 - [ ] Which drivers are working today? Who works on Friday?
-- [ ] Is product X in stock? If it is, in which layers (and how many)?
+- [ ] Is product X in stock? If it is, in which warehouse (and how many)?
 - [ ] Which orders need to be picked right now?
 - [ ] What is the oldest order that has been picked but needs to be executed?
 - [ ] Which pickers currently have no orders to pick?
