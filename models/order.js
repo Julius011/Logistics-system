@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
 
 const orderSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   orderNumber: {
     type: String,
     required: true,
@@ -28,7 +33,20 @@ const orderSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  // Other order details like timestamps, etc.
+  timestamp: [{
+    picking: {
+      type: Boolean,
+      default: false,
+    },
+    packing: {
+      type: Boolean,
+      default: false,
+    },
+    sending: {
+      type: Boolean,
+      default: false,
+    },
+  }],
 });
 
 export const Order = model('Order', orderSchema);
