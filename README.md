@@ -32,6 +32,5 @@ Criteria for A-level:
 
 # What you need
 1. Atlas database
-2. bun or node server running
-
-Then it should work.
+2. Bun or Node server running
+3. Connect your code with the given URL by atlas, must include a password ..<.password>..
