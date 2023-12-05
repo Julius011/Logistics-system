@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
 
 const employeeSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
