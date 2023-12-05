@@ -20,7 +20,7 @@ const employeeSchema = new Schema({
       type: String,
       required: true,
     },
-    hoursADay: {
+    workHours: {
       type: Number,
       required: true,
     },
