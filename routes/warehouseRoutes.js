@@ -27,14 +27,14 @@ router.get('/:id', async (req, res) => {
 
 // Other warehouse-related routes (POST, PUT, DELETE, etc.)
 
-// How the post should look like:
-// test();
-// async function test() {
-//   try {
-//     let wh = await Warehouse.create({ name: "G223" });
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
+warehousePost();
+async function warehousePost() {
+  try {
+    let postWarehouse = await Warehouse.create
+    ({name: "Warehouse001", address: "Warehouse Street 001", products: [{quantity: 30}]});
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 export default router;

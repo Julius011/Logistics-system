@@ -1,11 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 const orderSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   orderNumber: {
     type: String,
     required: true,

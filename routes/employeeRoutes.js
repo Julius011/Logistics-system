@@ -27,4 +27,14 @@ router.get('/:id', async (req, res) => {
 
 // Other employee-related routes (POST, PUT, DELETE, etc.)
 
+employeePost();
+async function employeePost() {
+  try {
+    let postEmployee = await Employee.create
+    ({name: "Jack", role: 'driver', schedules: [{dayOfWeek: "Mon - Fri", hoursADay: 8}]});
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export default router;

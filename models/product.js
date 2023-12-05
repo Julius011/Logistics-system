@@ -1,11 +1,6 @@
 import { Schema, model } from 'mongoose';
 
 const productSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   name: {
     type: String,
     required: true,
@@ -15,12 +10,9 @@ const productSchema = new Schema({
     type: Number,
     default: 0,
   },
-  storageLocation: {
-    shelfNumber: {
-      type: String,
-      required: true,
-    },
-    // Other storage location details
+  shelfNumber: {
+    type: Number,
+    required: true,
   },
   price: {
     type: Number,

@@ -1,17 +1,12 @@
 import { Schema, model } from 'mongoose';
 
 const warehouseSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   name: {
     type: String,
     required: true,
     unique: true,
   },
-  addres: {
+  address: {
     type: String,
     required: true,
     unique: true,

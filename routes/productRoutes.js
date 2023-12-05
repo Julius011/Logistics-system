@@ -27,4 +27,14 @@ router.get('/:id', async (req, res) => {
 
 // Other product-related routes (POST, PUT, DELETE, etc.)
 
+productPost();
+async function productPost() {
+  try {
+    let postProduct = await Product.create
+    ({name: "Product001", stockBalance: 30, shelfNumber: 1, price: 10, weight: 5});
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export default router;
