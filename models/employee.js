@@ -1,11 +1,16 @@
 import { Schema, model } from 'mongoose';
 
 const employeeSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   name: {
     type: String,
     required: true,
   },
-  type: {
+  role: {
     type: String,
     enum: ['picker', 'driver'],
     required: true,
@@ -15,13 +20,15 @@ const employeeSchema = new Schema({
       type: String,
       required: true,
     },
-    // Other schedule details like working hours
+    hours: {
+      type: Number,
+      required: true,
+    },
   }],
   warehouses: [{
     type: Schema.Types.ObjectId,
     ref: 'Warehouse',
   }],
-  // Other employee details
 });
 
 export const Employee = model('Employee', employeeSchema);
