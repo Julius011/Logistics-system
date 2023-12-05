@@ -29,3 +29,9 @@ Criteria for A-level:
 - [ ] Database schemas are complex and involve extensive validation
 - [ ] Incorrect requests are processed correctly with appropriate error messages
 - [ ] The API can answer all the questions above
+
+# What to do
+
+1. Make a account on cloud mangodb [Link](https://cloud.mongodb.com/v2/656dcad78a6b4d293a614080#/metrics/replicaSet/656dcb3409551f7107c0f0f7/explorer/test/employees/find)
+
+2. 
