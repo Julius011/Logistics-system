@@ -2,15 +2,22 @@ import { Router } from 'express';
 const router = Router();
 import { Product } from '../models/product.js';
 
-// POST new product
-router.post('/', async (req, res) => {
+// POST new products
+// post();
+async function post() {
   try {
-    const newProduct = await Product.create(req.body);
-    res.status(201).json(newProduct);
+    let product1000 = await Product.create
+    ({name: "product1000", stockBalance: "30", shelfNumber: "1", price: "50kr/kg", weight: "10kg"});
+    let product1001 = await Product.create
+    ({name: "product1001", stockBalance: "10", shelfNumber: "2", price: "70kr/kg", weight: "30kg"});
+    let product1002 = await Product.create
+    ({name: "product1002", stockBalance: "80", shelfNumber: "4", price: "30kr/kg", weight: "18kg"});
+    let product1003 = await Product.create
+    ({name: "product1003", stockBalance: "17", shelfNumber: "4", price: "20kr/kg", weight: "14kg"});
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.log(error.message);
   }
-});
+}
 
 // GET all products
 router.get('/', async (req, res) => {
@@ -21,6 +28,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// new router.get .... v
 
 // GET product by ID
 router.get('/:id', async (req, res) => {

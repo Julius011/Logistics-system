@@ -2,15 +2,16 @@ import { Router } from 'express';
 const router = Router();
 import { Warehouse } from '../models/warehouse.js';
 
-// POST new warehouse
-router.post('/', async (req, res) => {
+// POST new warehouses
+//post();
+async function post() {
   try {
-    const newWarehouse = await Warehouse.create(req.body);
-    res.status(201).json(newWarehouse);
+    let warehouse1 = await Warehouse.create
+    ({name: "warehouse101", products: [{product: 1000, quantity: 30}]});
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    console.log(error.message);
   }
-});
+}
 
 // GET all warehouses
 router.get('/', async (req, res) => {
@@ -21,6 +22,8 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// new router.get .... v
 
 // GET warehouse by ID
 router.get('/:id', async (req, res) => {

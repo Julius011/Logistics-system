@@ -8,7 +8,7 @@ Finally, we need to be able to keep track of orders. Each order has a unique ord
 Your task is to use Bun, Elysia and mongoose to create an API that can answer as many of the questions below as possible. By "answering the question" is meant that you should be able to enter an endpoint that corresponds to the question and get as accurate data as possible back as JSON. So you only need to deliver JSON and no complete HTML frontend.
 
 Key questions - checklist:
-- [ ] Which drivers are working today? Who works on Friday?
+- [x] Which drivers are working today? Who works on Friday?
 - [ ] Is product X in stock? If it is, in which warehouse (and how many)?
 - [ ] Which orders need to be picked right now?
 - [ ] What is the oldest order that has been picked but needs to be executed?

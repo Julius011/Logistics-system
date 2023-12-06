@@ -2,15 +2,18 @@ import { Router } from 'express';
 const router = Router();
 import { Order } from '../models/order.js';
 
-// POST new order
-router.post('/', async (req, res) => {
+// POST new orders
+// post();
+async function post() {
     try {
-      const newOrder = await Order.create(req.body);
-      res.status(201).json(newOrder);
+      let order01 = await Order.create
+      ({orderNumber: "01", products: [{product: "product1000", quantity: 5}], picker: "Rack", driver: "Jack"});
+      let order02 = await Order.create
+      ({orderNumber: "02", products: [{product: "product1002", quantity: 2}], picker: "Mack", driver: "Sack"});
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.log(error.message);
     }
-});
+}
 
 // GET all orders
 router.get('/', async (req, res) => {
@@ -21,6 +24,8 @@ router.get('/', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+// new router.get .... v
 
 // GET order by ID
 router.get('/:id', async (req, res) => {
