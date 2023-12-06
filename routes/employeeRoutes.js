@@ -35,6 +35,39 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+
+
+
+// GET drivers working today
+router.get('/today', async (req, res) => {
+    try {
+        const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        const driversToday = await Employee.find({
+            'role': 'driver',
+            'schedules.dayOfWeek': today,
+        });
+        res.json(driversToday);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// GET drivers working on Friday
+router.get('/friday', async (req, res) => {
+    try {
+        const driversFriday = await Employee.find({
+            'role': 'driver',
+            'schedules.dayOfWeek': 'Friday',
+        });
+        res.json(driversFriday);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+
+
 // Update an employee by ID
 router.put('/:id', async (req, res) => {
     try {
