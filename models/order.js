@@ -1,15 +1,20 @@
 import { Schema, model } from 'mongoose';
 
 const orderSchema = new Schema({
-  orderNumber: {
+  id: {
     type: String,
     required: true,
     unique: true,
   },
+  orderNumber: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
   products: [{
-    product: {
-      type: Schema.Types.ObjectId,
-      ref: 'Product',
+    productName: {
+      type: String,
+      required: true,
     },
     quantity: {
       type: Number,
@@ -17,31 +22,31 @@ const orderSchema = new Schema({
     },
   }],
   picker: {
-    type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    type: String,
+    required: true,
   },
   driver: {
-    type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    type: String,
+    required: true,
   },
   executed: {
     type: Boolean,
     default: false,
   },
-  timestamp: [{
-    picking: {
-      type: Boolean,
-      default: false,
-    },
-    packing: {
-      type: Boolean,
-      default: false,
-    },
-    sending: {
-      type: Boolean,
-      default: false,
-    },
-  }],
+  // timestamp: [{
+  //   picking: {
+  //     type: Boolean,
+  //     default: false,
+  //   },
+  //   packing: {
+  //     type: Boolean,
+  //     default: false,
+  //   },
+  //   sending: {
+  //     type: Boolean,
+  //     default: false,
+  //   },
+  // }],
 });
 
 export const Order = model('Order', orderSchema);

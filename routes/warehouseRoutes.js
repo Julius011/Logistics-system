@@ -6,8 +6,8 @@ import { Warehouse } from '../models/warehouse.js';
 //post();
 async function post() {
   try {
-    let warehouse1 = await Warehouse.create
-    ({name: "warehouse101", products: [{product: 1000, quantity: 30}]});
+    let warehouse1 = await Warehouse.create ({id: "1", name: "warehouse1", products: [{productName: "Product1", quantity: 30}]});
+    let warehouse2 = await Warehouse.create ({id: "2", name: "warehouse2", products: [{productName: "Product3", quantity: 80}]});
   } catch (error) {
     console.log(error.message);
   }

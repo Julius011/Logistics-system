@@ -1,20 +1,32 @@
 import { Router } from 'express';
 const router = Router();
 import { Employee } from '../models/employee.js';
+import fs from 'fs';
+import path from 'path';
 
 // POST new employees
-// post();
+//post();
 async function post() {
-    const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
     try {
-      let employee1 = await Employee.create
-      ({id: "1", name: "Jack", role: 'driver', schedules: [{dayOfWeek: "Friday", workHours: 8}]});
-      let employee2 = await Employee.create
-      ({id: "2", name: "Rack", role: 'picker', schedules: [{dayOfWeek: "Friday", workHours: 8}]});
-      let employee3 = await Employee.create
-      ({id: "3", name: "Sack", role: 'driver', schedules: [{dayOfWeek: today, workHours: 8}]});
-      let employee4 = await Employee.create
-      ({id: "4", name: "Mack", role: 'picker', schedules: [{dayOfWeek: today, workHours: 8}]});
+        const namesFilePath = path.join(__dirname, '../data/nameData.txt');
+        const namesData = fs.readFileSync(namesFilePath, 'utf-8').split('\n').filter(Boolean);
+  
+        const daysFilePath = path.join(__dirname, '../data/dateData.txt');
+        const daysData = fs.readFileSync(daysFilePath, 'utf-8').split('\n').filter(Boolean);
+  
+        for (let i = 0; i < 10; i++) { // Change x in i < x to the number of employees you want to create
+            const randomNameIndex = Math.floor(Math.random() * namesData.length);
+            const randomDayIndex = Math.floor(Math.random() * daysData.length);
+            const randomRole = Math.random() < 0.5 ? 'driver' : 'picker'; // Randomly assign driver or picker
+  
+            const employee = await Employee.create({
+                id: (i + 0).toString(),
+                name: namesData[randomNameIndex],
+                role: randomRole,
+            schedules: [{ dayOfWeek: daysData[randomDayIndex], workHours: 8 }],
+            });
+            console.log(`Created employee: ${employee.name}`);
+        }
     } catch (error) {
       console.log(error.message);
     }

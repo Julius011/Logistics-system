@@ -1,15 +1,38 @@
 import { Router } from 'express';
 const router = Router();
 import { Order } from '../models/order.js';
+import fs from 'fs';
+import path from 'path';
 
 // POST new orders
-// post();
+//post();
 async function post() {
     try {
-      let order01 = await Order.create
-      ({orderNumber: "01", products: [{product: "product1000", quantity: 5}], picker: "Rack", driver: "Jack"});
-      let order02 = await Order.create
-      ({orderNumber: "02", products: [{product: "product1002", quantity: 2}], picker: "Mack", driver: "Sack"});
+        const numFilePath = path.join(__dirname, '../data/numData.txt');
+        const numData = fs.readFileSync(numFilePath, 'utf-8').split('\n').filter(Boolean);
+
+        const productNameFilePath = path.join(__dirname, '../data/productNameData.txt');
+        const productNameData = fs.readFileSync(productNameFilePath, 'utf-8').split('\n').filter(Boolean);
+
+        const namesFilePath = path.join(__dirname, '../data/nameData.txt');
+        const namesData = fs.readFileSync(namesFilePath, 'utf-8').split('\n').filter(Boolean);
+        
+        for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
+            const randomNumIndex = Math.floor(Math.random() * numData.length);
+            const randomProductNameIndex = Math.floor(Math.random() * productNameData.length);
+            const randomNameIndex = Math.floor(Math.random() * namesData.length);
+            const randomRole = Math.random() < 0.5 ? true : false; // Randomly true or false
+  
+            const order = await Order.create({
+                id: (i + 0).toString(),
+                orderNumber: numData[randomNumIndex],
+                products: [{productName: productNameData[randomProductNameIndex], quantity: randomNumIndex}],
+                picker: namesData[randomNameIndex],
+                driver: namesData[randomNameIndex],
+                executed: randomRole,
+            });
+            console.log(`Created order: ${order.orderNumber}`);
+        }
     } catch (error) {
       console.log(error.message);
     }
