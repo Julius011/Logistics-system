@@ -3,11 +3,24 @@ const router = Router();
 import { Warehouse } from '../models/warehouse.js';
 
 // POST new warehouses
-//post();
+// post();
 async function post() {
   try {
-    let warehouse1 = await Warehouse.create ({id: "1", name: "warehouse1", products: [{productName: "Product1", quantity: 30}]});
-    let warehouse2 = await Warehouse.create ({id: "2", name: "warehouse2", products: [{productName: "Product3", quantity: 80}]});
+      Warehouse.collection.drop()
+      const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
+
+      for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
+        const randomName= Math.floor(Math.random() * namesData.length);
+        const randomNumProduct = Math.floor(Math.random() * 1000);
+        const randomNumStock = Math.floor(Math.random() * 100);
+
+        const warehouse = await Warehouse.create({
+          id: (i + 0).toString(),
+          name: namesData[randomName],
+          products: [{productName: "product" + randomNumProduct, quantity: randomNumStock}],
+        });
+        console.log(`Created order: ${warehouse.name}`);
+      }
   } catch (error) {
     console.log(error.message);
   }

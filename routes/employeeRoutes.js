@@ -1,34 +1,30 @@
 import { Router } from 'express';
 const router = Router();
 import { Employee } from '../models/employee.js';
-import fs from 'fs';
-import path from 'path';
 
 // POST new employees
-//post();
+// post();
 async function post() {
     try {
-        const namesFilePath = path.join(__dirname, '../data/nameData.txt');
-        const namesData = fs.readFileSync(namesFilePath, 'utf-8').split('\n').filter(Boolean);
-  
-        const daysFilePath = path.join(__dirname, '../data/dateData.txt');
-        const daysData = fs.readFileSync(daysFilePath, 'utf-8').split('\n').filter(Boolean);
-  
+        Employee.collection.drop()
+        const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
+        const daysData  = (await (Bun.file("data/dateData.txt").text())).split("\n");
+
         for (let i = 0; i < 10; i++) { // Change x in i < x to the number of employees you want to create
-            const randomNameIndex = Math.floor(Math.random() * namesData.length);
-            const randomDayIndex = Math.floor(Math.random() * daysData.length);
-            const randomRole = Math.random() < 0.5 ? 'driver' : 'picker'; // Randomly assign driver or picker
+            const randomName= Math.floor(Math.random() * namesData.length);
+            const randomDay= Math.floor(Math.random() * daysData.length);
+            const randomRole = Math.random() < 0.333 ? 'driver' : 'picker'; // Randomly assign driver or picker
   
             const employee = await Employee.create({
                 id: (i + 0).toString(),
-                name: namesData[randomNameIndex],
+                name: namesData[randomName],
                 role: randomRole,
-            schedules: [{ dayOfWeek: daysData[randomDayIndex], workHours: 8 }],
+            schedules: [{ dayOfWeek: daysData[randomDay], workHours: 8 }],
             });
             console.log(`Created employee: ${employee.name}`);
         }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
 }
 
@@ -43,7 +39,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET drivers working today
-router.get('/drivers/Today', async (req, res) => {
+router.get('/drivers/today', async (req, res) => {
     try {
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const driversToday = await Employee.find({
@@ -57,7 +53,7 @@ router.get('/drivers/Today', async (req, res) => {
 });
 
 // GET drivers working on Friday
-router.get('/drivers/Friday', async (req, res) => {
+router.get('/drivers/friday', async (req, res) => {
     try {
         const driversFriday = await Employee.find({
             'role': 'driver',

@@ -1,35 +1,28 @@
 import { Router } from 'express';
 const router = Router();
 import { Order } from '../models/order.js';
-import fs from 'fs';
-import path from 'path';
 
 // POST new orders
-//post();
+// post();
 async function post() {
     try {
-        const numFilePath = path.join(__dirname, '../data/numData.txt');
-        const numData = fs.readFileSync(numFilePath, 'utf-8').split('\n').filter(Boolean);
+        Order.collection.drop()
+        const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
 
-        const productNameFilePath = path.join(__dirname, '../data/productNameData.txt');
-        const productNameData = fs.readFileSync(productNameFilePath, 'utf-8').split('\n').filter(Boolean);
-
-        const namesFilePath = path.join(__dirname, '../data/nameData.txt');
-        const namesData = fs.readFileSync(namesFilePath, 'utf-8').split('\n').filter(Boolean);
-        
         for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
-            const randomNumIndex = Math.floor(Math.random() * numData.length);
-            const randomProductNameIndex = Math.floor(Math.random() * productNameData.length);
-            const randomNameIndex = Math.floor(Math.random() * namesData.length);
-            const randomRole = Math.random() < 0.5 ? true : false; // Randomly true or false
+            const randomNum = Math.floor(Math.random() * 1000);
+            const randomNameOne = Math.floor(Math.random() * namesData.length);
+            const randomNameTwo = Math.floor(Math.random() * namesData.length);
+            const randomBool = Math.random() < 0.5; // true or false
+            // Samme approved 
   
             const order = await Order.create({
                 id: (i + 0).toString(),
-                orderNumber: numData[randomNumIndex],
-                products: [{productName: productNameData[randomProductNameIndex], quantity: randomNumIndex}],
-                picker: namesData[randomNameIndex],
-                driver: namesData[randomNameIndex],
-                executed: randomRole,
+                orderNumber: randomNum,
+                products: [{productName: "product" + randomNum, quantity: randomNum}],
+                picker: namesData[randomNameOne],
+                driver: namesData[randomNameTwo],
+                executed: randomBool,
             });
             console.log(`Created order: ${order.orderNumber}`);
         }

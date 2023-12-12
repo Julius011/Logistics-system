@@ -2,24 +2,33 @@ import { Router } from 'express';
 const router = Router();
 import { Product } from '../models/product.js';
 
-// POST new products
+// POST new product
 // post();
+async function post() {
+  try {
+      Product.collection.drop()
+      
+      for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
+        const randomNumProduct = Math.floor(Math.random() * 1000);
+        const randomNumStock = Math.floor(Math.random() * 100);
+        const randomNumShelf = Math.floor(Math.random() * 10);
+        const randomNumPrice= Math.floor(Math.random() * 10000);
+        const randomNumWeight = Math.floor(Math.random() * 50);
 
-
-// async function post() {
-//   try {
-//     let product1000 = await Product.create
-//     ({id: "1", name: "product1", stockBalance: "30", shelfNumber: "1", price: "50kr/kg", weight: "10kg"});
-//     let product1001 = await Product.create
-//     ({id: "2", name: "product2", stockBalance: "10", shelfNumber: "2", price: "70kr/kg", weight: "30kg"});
-//     let product1002 = await Product.create
-//     ({id: "3", name: "product3", stockBalance: "80", shelfNumber: "4", price: "30kr/kg", weight: "18kg"});
-//     let product1003 = await Product.create
-//     ({id: "4", name: "product4", stockBalance: "17", shelfNumber: "4", price: "20kr/kg", weight: "14kg"});
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// }
+        const product = await Product.create({
+          id: (i + 0).toString(),
+          name: "product" + randomNumProduct,
+          stockBalance: randomNumStock,
+          shelfNumber: randomNumShelf,
+          price: randomNumPrice,
+          weight: randomNumWeight + "kg"
+        });
+        console.log(`Created order: ${product.name}`);
+      }
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 // GET all products
 router.get('/', async (req, res) => {
