@@ -10,7 +10,7 @@ async function post() {
         const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
         const daysData  = (await (Bun.file("data/dateData.txt").text())).split("\n");
 
-        for (let i = 0; i < 10; i++) { // Change x in i < x to the number of employees you want to create
+        for (let i = 0; i < 100; i++) { // Change x in i < x to the number of employees you want to create
             const randomName= Math.floor(Math.random() * namesData.length);
             const randomDay= Math.floor(Math.random() * daysData.length);
             const randomRole = Math.random() < 0.333 ? 'driver' : 'picker'; // Randomly assign driver or picker

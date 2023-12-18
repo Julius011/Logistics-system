@@ -9,7 +9,7 @@ async function post() {
       Warehouse.collection.drop()
       const placeData = (await (Bun.file("data/placeData.txt").text())).split("\n");
 
-      for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
+      for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
         const randomPlaceName= Math.floor(Math.random() * placeData.length);
         const randomNumProduct = Math.floor(Math.random() * 1000);
         const randomNumStock = Math.floor(Math.random() * 100);

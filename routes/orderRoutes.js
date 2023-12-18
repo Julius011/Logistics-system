@@ -9,7 +9,7 @@ async function post() {
         Order.collection.drop()
         const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
 
-        for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
+        for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
             const randomNum = Math.floor(Math.random() * 1000);
             const randomNameOne = Math.floor(Math.random() * namesData.length);
             const randomNameTwo = Math.floor(Math.random() * namesData.length);
