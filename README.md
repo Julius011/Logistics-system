@@ -25,7 +25,7 @@ Criteria for C-level:
 - [x] The API can answer most of the questions above
 
 Criteria for A-level:
-- [?] The work is carried out independently with supervision only in "high-level issues"
+- [ ] The work is carried out independently with supervision only in "high-level issues"
 - [x] Database schemas are complex and involve extensive validation
 - [x] Incorrect requests are processed correctly with appropriate error messages
 - [x] The API can answer all the questions above
