@@ -97,6 +97,29 @@ router.get('/picker/no-orders', async (req, res) => {
   }
 });
 
+// GET total cost of all completed orders for the month of October
+router.get('/executed/cost/october', async (req, res) => {
+  try {
+    const completedOrdersOctober = await Order.find({
+      executed: true,
+      orderMonth: 'October',
+    });
+
+    let totalCost = 0;
+    completedOrdersOctober.forEach(order => {
+      order.products.forEach(product => {
+        const unitCost = 10;
+        const productCost = unitCost * product.quantity;
+        totalCost += productCost;
+      });
+    });
+
+    res.json({ totalCost });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // GET order by ID
 router.get('/:id', async (req, res) => {
     try {
