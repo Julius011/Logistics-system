@@ -58,6 +58,17 @@ router.get('/', async (req, res) => {
 
 // new router.get .... v
 
+router.get('/timestamp/picking', async (req, res) => {
+  try {
+      const orderPicked = await Order.find({
+          'timestamp.picking': 'false',
+      });
+      res.json(orderPicked);
+  } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // GET order by ID
 router.get('/:id', async (req, res) => {
     try {
