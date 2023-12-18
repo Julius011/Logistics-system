@@ -39,8 +39,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// new router.get .... v
-
 // GET product by ID
 router.get('/:id', async (req, res) => {
   try {

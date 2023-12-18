@@ -14,7 +14,7 @@ Key questions - checklist:
 - [x] What is the oldest order that has been picked but needs to be executed?
 - [x] Which pickers currently have no orders to pick?
 - [x] What is the total cost of all completed orders for the month of October?
-- [ ] What was the most expensive order picked in the month of August?
+- [x] What was the most expensive order picked in the month of August?
 
 Criteria for E-level:
 - [x] The work is done, but required detailed supervision from start to finish
@@ -25,10 +25,10 @@ Criteria for C-level:
 - [x] The API can answer most of the questions above
 
 Criteria for A-level:
-- [ ] The work is carried out independently with supervision only in "high-level issues"
-- [ ] Database schemas are complex and involve extensive validation
+- [?] The work is carried out independently with supervision only in "high-level issues"
+- [x] Database schemas are complex and involve extensive validation
 - [x] Incorrect requests are processed correctly with appropriate error messages
-- [ ] The API can answer all the questions above
+- [x] The API can answer all the questions above
 
 ### What you need
 1. Atlas database

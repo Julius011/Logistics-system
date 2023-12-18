@@ -120,6 +120,45 @@ router.get('/executed/cost/october', async (req, res) => {
   }
 });
 
+// GET most expensive order picked in August
+router.get('/executed/most-cost/august', async (req, res) => {
+  try {
+    const augustOrders = await Order.aggregate([
+      {
+        $match: {
+          orderMonth: 'August',
+          executed: true,
+        },
+      },
+      {
+        $unwind: '$products',
+      },
+      {
+        $group: {
+          _id: '$_id',
+          totalCost: { $sum: { $multiply: ['$products.quantity', 10] } },
+          orderDetails: { $first: '$$ROOT' },
+        },
+      },
+      {
+        $sort: { totalCost: -1 }
+      },
+      {
+        $limit: 1
+      }
+    ]);
+
+    if (augustOrders.length === 0) {
+      return res.status(404).json({ error: 'No orders found for August' });
+    }
+
+    res.json(augustOrders[0]);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 // GET order by ID
 router.get('/:id', async (req, res) => {
     try {
