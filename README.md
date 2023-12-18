@@ -17,17 +17,17 @@ Key questions - checklist:
 - [ ] What was the most expensive order picked in the month of August?
 
 Criteria for E-level:
-- [ ] The work is done, but required detailed supervision from start to finish
-- [ ] The API can answer some of the questions above
+- [x] The work is done, but required detailed supervision from start to finish
+- [x] The API can answer some of the questions above
 
 Criteria for C-level:
-- [ ] The work is carried out with some supervision, sometimes but not always at a detailed level
-- [ ] The API can answer most of the questions above
+- [x] The work is carried out with some supervision, sometimes but not always at a detailed level
+- [x] The API can answer most of the questions above
 
 Criteria for A-level:
 - [ ] The work is carried out independently with supervision only in "high-level issues"
 - [ ] Database schemas are complex and involve extensive validation
-- [ ] Incorrect requests are processed correctly with appropriate error messages
+- [x] Incorrect requests are processed correctly with appropriate error messages
 - [ ] The API can answer all the questions above
 
 ### What you need
