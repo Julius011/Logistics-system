@@ -56,7 +56,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET order picking status
+// GET all false order picking status
 router.get('/timestamp/picking', async (req, res) => {
   try {
       const orderPicked = await Order.find({
@@ -68,7 +68,7 @@ router.get('/timestamp/picking', async (req, res) => {
   }
 });
 
-// GET oldest picking but exec is false
+// GET oldest picking status
 router.get('/timestamp/picking/oldest', async (req, res) => {
   try {
     const oldestPickedOrder = await Order.findOne({
@@ -82,6 +82,17 @@ router.get('/timestamp/picking/oldest', async (req, res) => {
   }
 });
 
+// GET all picker with no order
+router.get('/picker/no-orders', async (req, res) => {
+  try {
+    const pickersWithNoOrders = await Order.distinct('picker', {
+      executed: false, 
+    });
+    res.json(pickersWithNoOrders);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // GET order by ID
 router.get('/:id', async (req, res) => {
