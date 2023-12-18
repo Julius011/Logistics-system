@@ -4,6 +4,7 @@ import { Order } from '../models/order.js';
 
 // POST new orders
 // post();
+
 async function post() {
     try {
         Order.collection.drop()
@@ -13,16 +14,31 @@ async function post() {
             const randomNum = Math.floor(Math.random() * 1000);
             const randomNameOne = Math.floor(Math.random() * namesData.length);
             const randomNameTwo = Math.floor(Math.random() * namesData.length);
-            const randomBool = Math.random() < 0.5; // true or false
-            // Samme approved 
-  
+            const randomExec = Math.random() < 0.5; // true or false
+            let boolPacking, boolPicking, boolSending;
+
+            if(randomExec == false) {
+              boolPicking = Math.random() < 0.5; // true or false
+              if(boolPicking == true) {
+                boolPacking = Math.random() < 0.5; // true or false
+                if (boolPacking == true) {
+                  boolSending = Math.random() < 0.5; // true or false
+                }
+              }
+            } else {
+              boolPacking = true;
+              boolPicking = true;
+              boolSending = true;
+            }
+
             const order = await Order.create({
                 id: (i + 0).toString(),
                 orderNumber: randomNum,
                 products: [{productName: "product" + randomNum, quantity: randomNum}],
                 picker: namesData[randomNameOne],
                 driver: namesData[randomNameTwo],
-                executed: randomBool,
+                executed: randomExec,
+                timestamp: [{picking: boolPicking, packing: boolPacking, sending: boolSending}],
             });
             console.log(`Created order: ${order.orderNumber}`);
         }

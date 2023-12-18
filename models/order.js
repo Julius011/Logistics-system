@@ -33,20 +33,20 @@ const orderSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  // timestamp: [{
-  //   picking: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-  //   packing: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-  //   sending: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-  // }],
+  timestamp: [{
+    picking: {
+      type: Boolean,
+      default: false,
+    },
+    packing: {
+      type: Boolean,
+      default: false,
+    },
+    sending: {
+      type: Boolean,
+      default: false,
+    },
+  }],
 });
 
 export const Order = model('Order', orderSchema);

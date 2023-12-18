@@ -7,16 +7,16 @@ import { Warehouse } from '../models/warehouse.js';
 async function post() {
   try {
       Warehouse.collection.drop()
-      const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
+      const placeData = (await (Bun.file("data/placeData.txt").text())).split("\n");
 
       for (let i = 0; i < 5; i++) { // Change x in i < x to the number of orders you want to create
-        const randomName= Math.floor(Math.random() * namesData.length);
+        const randomPlaceName= Math.floor(Math.random() * placeData.length);
         const randomNumProduct = Math.floor(Math.random() * 1000);
         const randomNumStock = Math.floor(Math.random() * 100);
 
         const warehouse = await Warehouse.create({
           id: (i + 0).toString(),
-          name: namesData[randomName],
+          name: placeData[randomPlaceName],
           products: [{productName: "product" + randomNumProduct, quantity: randomNumStock}],
         });
         console.log(`Created order: ${warehouse.name}`);
