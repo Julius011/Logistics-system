@@ -56,8 +56,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// new router.get .... v
-
+// GET order picking status
 router.get('/timestamp/picking', async (req, res) => {
   try {
       const orderPicked = await Order.find({
@@ -68,6 +67,21 @@ router.get('/timestamp/picking', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// GET oldest picking but exec is false
+router.get('/timestamp/picking/oldest', async (req, res) => {
+  try {
+    const oldestPickedOrder = await Order.findOne({
+      'timestamp.picking': true,
+      executed: false,
+    }).sort({ _id: 1 });
+    
+    res.json(oldestPickedOrder);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 // GET order by ID
 router.get('/:id', async (req, res) => {

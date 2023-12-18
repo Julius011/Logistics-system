@@ -11,7 +11,7 @@ Key questions - checklist:
 - [x] Which drivers are working today? Who works on Friday?
 - [x] Is product X in stock? If it is, in which warehouse (and how many)?
 - [x] Which orders need to be picked right now?
-- [ ] What is the oldest order that has been picked but needs to be executed?
+- [x] What is the oldest order that has been picked but needs to be executed?
 - [ ] Which pickers currently have no orders to pick?
 - [ ] What is the total cost of all completed orders for the month of October?
 - [ ] What was the most expensive order picked in the month of August?
