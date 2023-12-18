@@ -4,7 +4,6 @@ import { Order } from '../models/order.js';
 
 // POST new orders
 // post();
-
 async function post() {
     try {
         Order.collection.drop()

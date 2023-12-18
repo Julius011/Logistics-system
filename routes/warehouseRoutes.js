@@ -36,7 +36,26 @@ router.get('/', async (req, res) => {
   }
 });
 
-// new router.get .... v
+// GET product availability by name
+router.get('/product/:productName', async (req, res) => {
+  try {
+    const productName = req.params.productName;
+    const warehouses = await Warehouse.find({ 'products.productName': productName });
+
+    if (warehouses.length === 0) {
+      return res.json({ message: 'Product not found in any warehouse' });
+    }
+
+    const productLocations = warehouses.map(warehouse => ({
+      warehouseName: warehouse.name,
+      quantity: warehouse.products.find(product => product.productName === productName).quantity
+    }));
+
+    res.json({ message: 'Product found in warehouses', productLocations });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
 // GET warehouse by ID
 router.get('/:id', async (req, res) => {
