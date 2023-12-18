@@ -11,6 +11,10 @@ const orderSchema = new Schema({
     required: true,
     unique: true,
   },
+  orderMonth: {
+    type: String,
+    required: true,
+  },
   products: [{
     productName: {
       type: String,

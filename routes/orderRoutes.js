@@ -8,11 +8,13 @@ async function post() {
     try {
         Order.collection.drop()
         const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
+        const monthData = (await (Bun.file("data/monthData.txt").text())).split("\n");
 
         for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
             const randomNum = Math.floor(Math.random() * 1000);
             const randomNameOne = Math.floor(Math.random() * namesData.length);
             const randomNameTwo = Math.floor(Math.random() * namesData.length);
+            const randomMonth = Math.floor(Math.random() * monthData.length);
             const randomExec = Math.random() < 0.5; // true or false
             let boolPacking, boolPicking, boolSending;
 
@@ -33,6 +35,7 @@ async function post() {
             const order = await Order.create({
                 id: (i + 0).toString(),
                 orderNumber: randomNum,
+                orderMonth: monthData[randomMonth],
                 products: [{productName: "product" + randomNum, quantity: randomNum}],
                 picker: namesData[randomNameOne],
                 driver: namesData[randomNameTwo],
