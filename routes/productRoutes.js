@@ -12,7 +12,6 @@ async function post() {
         const randomNumProduct = Math.floor(Math.random() * 1000);
         const randomNumStock = Math.floor(Math.random() * 100);
         const randomNumShelf = Math.floor(Math.random() * 10);
-        const randomNumPrice= Math.floor(Math.random() * 10000);
         const randomNumWeight = Math.floor(Math.random() * 50);
 
         const product = await Product.create({
@@ -20,7 +19,7 @@ async function post() {
           name: "product" + randomNumProduct,
           stockBalance: randomNumStock,
           shelfNumber: randomNumShelf,
-          price: randomNumPrice,
+          price: 10,
           weight: randomNumWeight + "kg"
         });
         console.log(`Created order: ${product.name}`);
