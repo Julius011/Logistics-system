@@ -13,7 +13,7 @@ Key questions - checklist:
 - [x] Which orders need to be picked right now?
 - [x] What is the oldest order that has been picked but needs to be executed?
 - [x] Which pickers currently have no orders to pick?
-- [ ] What is the total cost of all completed orders for the month of October?
+- [x] What is the total cost of all completed orders for the month of October?
 - [ ] What was the most expensive order picked in the month of August?
 
 Criteria for E-level:
