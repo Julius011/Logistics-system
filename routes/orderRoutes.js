@@ -105,14 +105,14 @@ router.get('/executed/cost/october', async (req, res) => {
       orderMonth: 'October',
     });
 
-    let totalCost = 0;
-    completedOrdersOctober.forEach(order => {
+    const totalCost = completedOrdersOctober.reduce((acc, order) => {
       order.products.forEach(product => {
         const unitCost = 10;
         const productCost = unitCost * product.quantity;
-        totalCost += productCost;
+        acc += productCost;
       });
-    });
+      return acc;
+    }, 0);
 
     res.json({ totalCost });
   } catch (error) {
