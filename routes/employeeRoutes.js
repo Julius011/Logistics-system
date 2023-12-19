@@ -38,29 +38,28 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET driver or picker working on a specific day
+router.get('/:type/:day', async ({params: {type: employeeType, day: wantedDay}}, res) => {
+  try {
+    const driversFriday = await Employee.find({
+      'role': employeeType,
+      'schedules.dayOfWeek': wantedDay,
+    });
+    res.json(driversFriday);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // GET drivers working today
-router.get('/driver/today', async (req, res) => {
+router.get('/:type/Today', async ({params: {type: employeeType}}, res) => {
     try {
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const driversToday = await Employee.find({
-            'role': 'driver',
+            'role': employeeType,
             'schedules.dayOfWeek': today,
         });
         res.json(driversToday);
-    } catch (error) {
-        res.status(500).json({ error: 'Internal Server Error' });
-    }
-});
-
-
-// GET driver or picker working on a specific day
-router.get('/:type/:day', async ({params: {type: employeeType, day: wantedDay}}, res) => {
-    try {
-        const driversFriday = await Employee.find({
-            'role': employeeType,
-            'schedules.dayOfWeek': wantedDay,
-        });
-        res.json(driversFriday);
     } catch (error) {
         res.status(500).json({ error: 'Internal Server Error' });
     }
