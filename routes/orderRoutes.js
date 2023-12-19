@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { Order } from '../models/order.js';
 const router = Router();
 
-// POST new orders
-// post();
-async function post() {
+// Create new orders
+// createOrder();
+async function createOrder() {
     try {
         Order.collection.drop()
         const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");

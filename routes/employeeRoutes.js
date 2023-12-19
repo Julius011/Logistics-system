@@ -2,9 +2,9 @@ import { Router } from 'express';
 const router = Router();
 import { Employee } from '../models/employee.js';
 
-// POST new employees
-// post();
-async function post() {
+// Create new employees
+// createEmployee();
+async function createEmployee() {
     try {
         Employee.collection.drop()
         const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");

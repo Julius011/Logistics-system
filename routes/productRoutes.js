@@ -2,9 +2,9 @@ import { Router } from 'express';
 const router = Router();
 import { Product } from '../models/product.js';
 
-// POST new product
-// post();
-async function post() {
+// Create new product
+// createProduct();
+async function createProduct() {
   try {
       Product.collection.drop()
       

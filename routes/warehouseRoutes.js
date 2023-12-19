@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { Warehouse } from '../models/warehouse.js';
 const router = Router();
 
-// POST new warehouses
-// post();
-async function post() {
+// Create new warehouses
+// createWarehouse();
+async function createWarehouse() {
   try {
       Warehouse.collection.drop()
       const placeData = (await (Bun.file("data/placeData.txt").text())).split("\n");
