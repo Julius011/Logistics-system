@@ -53,7 +53,7 @@ router.get('/driver/today', async (req, res) => {
 });
 
 
-// GET drivers working on Friday
+// GET driver or picker working on a specific day
 router.get('/:type/:day', async ({params: {type: employeeType, day: wantedDay}}, res) => {
     try {
         const driversFriday = await Employee.find({
