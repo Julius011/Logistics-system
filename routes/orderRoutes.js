@@ -1,6 +1,6 @@
 import { Router } from 'express';
-const router = Router();
 import { Order } from '../models/order.js';
+const router = Router();
 
 // POST new orders
 // post();

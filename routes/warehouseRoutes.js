@@ -1,6 +1,6 @@
 import { Router } from 'express';
-const router = Router();
 import { Warehouse } from '../models/warehouse.js';
+const router = Router();
 
 // POST new warehouses
 // post();

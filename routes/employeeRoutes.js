@@ -39,7 +39,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET drivers working today
-router.get('/drivers/Today', async (req, res) => {
+router.get('/driver/today', async (req, res) => {
     try {
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const driversToday = await Employee.find({
@@ -52,12 +52,13 @@ router.get('/drivers/Today', async (req, res) => {
     }
 });
 
+
 // GET drivers working on Friday
-router.get('/drivers/Friday', async (req, res) => {
+router.get('/:type/:day', async ({params: {type: employeeType, day: wantedDay}}, res) => {
     try {
         const driversFriday = await Employee.find({
-            'role': 'driver',
-            'schedules.dayOfWeek': 'Friday',
+            'role': employeeType,
+            'schedules.dayOfWeek': wantedDay,
         });
         res.json(driversFriday);
     } catch (error) {
