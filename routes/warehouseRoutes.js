@@ -2,28 +2,54 @@ import { Router } from 'express';
 import { Warehouse } from '../models/warehouse.js';
 const router = Router();
 
-// Create new warehouses
-// createWarehouse();
-async function createWarehouse() {
+
+// Utility function to get a random number in interval
+const rndNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;
+
+// Utility function to get a random item from an array
+const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+// Utility function to generate random products
+const generateRandomProducts = () => ({
+  productName: "product" + rndNum(0, 1000000),
+  quantity: rndNum(0, 30),
+});
+
+// Utility function to generate random employee
+const generateRandomWarehouse = (id, placeData) => {
+  const randomPlaceName = getRandomItem(placeData);
+  
+  return {
+    id: id.toString(),
+    name: randomPlaceName,
+    products: [generateRandomProducts],
+  };
+};
+
+// Create new employees
+// createEmployee(100);
+async function createEmployee(numWarehouse) {
   try {
-      Warehouse.collection.drop()
-      const placeData = (await (Bun.file("data/placeData.txt").text())).split("\n");
-
-      for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
-        const randomPlaceName= Math.floor(Math.random() * placeData.length);
-        const randomNumProduct = Math.floor(Math.random() * 1000);
-        const randomNumStock = Math.floor(Math.random() * 100);
-
-        const warehouse = await Warehouse.create({
-          id: (i + 0).toString(),
-          name: placeData[randomPlaceName],
-          products: [{productName: "product" + randomNumProduct, quantity: randomNumStock}],
-        });
-        console.log(`Created order: ${warehouse.name}`);
-      }
+    await Warehouse.collection.drop()
   } catch (error) {
-    console.log(error.message);
+    console.log(`Failed dropping Warehouse database: ${error.message}`);
   }
+
+  const placeData = (await (Bun.file("data/placeData.txt").text())).split("\n");
+
+  // Change x in i < x to the number of employees you want to create
+  for (let i = 0; i < numWarehouse; i++) {
+    const warehouseData = generateRandomWarehouse(i, placeData);
+
+    let warehouse;
+    try {
+      warehouse = await Warehouse.create(warehouseData);
+    } catch (error) {
+      console.log(`Could not create warehouse ${i}: ${error.message}`);
+    }
+
+    console.log(`Created warehouse: ${warehouse.name}`);
+  };
 }
 
 // GET all warehouses

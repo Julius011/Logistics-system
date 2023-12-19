@@ -42,7 +42,7 @@ const generateRandomOrder = (id, namesData, monthData) => {
     id: id.toString(),
     orderNumber: rndNum(0, 10000000),
     orderMonth: randomMonth,
-    products: [generateRandomProducts(namesData)],
+    products: [generateRandomProducts],
     picker: randomNameOne,
     driver: randomNameTwo,
     executed: executed,
@@ -168,7 +168,7 @@ router.get('/executed/most-cost/august', async (req, res) => {
       {
         $group: {
           _id: '$_id',
-          totalCost: { $sum: { $multiply: ['$products.quantity', 10] } },
+          totalCost: { $sum: { $multiply: ['$products.quantity', rndNum(10, 40)] } },
           orderDetails: { $first: '$$ROOT' },
         },
       },

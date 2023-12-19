@@ -2,31 +2,43 @@ import { Router } from 'express';
 const router = Router();
 import { Product } from '../models/product.js';
 
-// Create new product
-// createProduct();
-async function createProduct() {
-  try {
-      Product.collection.drop()
-      
-      for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
-        const randomNumProduct = Math.floor(Math.random() * 1000);
-        const randomNumStock = Math.floor(Math.random() * 100);
-        const randomNumShelf = Math.floor(Math.random() * 10);
-        const randomNumWeight = Math.floor(Math.random() * 50);
+// Utility function to get a random number in interval
+const rndNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-        const product = await Product.create({
-          id: (i + 0).toString(),
-          name: "product" + randomNumProduct,
-          stockBalance: randomNumStock,
-          shelfNumber: randomNumShelf,
-          price: 10,
-          weight: randomNumWeight + "kg"
-        });
-        console.log(`Created order: ${product.name}`);
-      }
+// Utility function to generate random order with timestamp based on conditions
+const generateRandomProduct = (id) => {
+  return {
+    id: id.toString(),
+    name: "product" + rndNum(0, 1000000),
+    stockBalance: rndNum(0, 40),
+    shelfNumber: rndNum(0, 5),
+    price: rndNum(10, 40),
+    weight: rndNum(1, 50) + "kg"
+  };
+};
+
+// Create new product
+// createProduct(100);
+async function createProduct(numProduct) {
+  try {
+    await Product.collection.drop()
   } catch (error) {
-    console.log(error.message);
+    console.log(`Failed dropping Product database: ${error.message}`);
   }
+
+  // Create new product loop
+  for (let i = 0; i < numProduct; i++) {
+    const productData = generateRandomProduct(i);
+
+    let product;
+    try {
+      product = await Product.create(productData);
+    } catch (error) {
+      console.log(`Could not create product ${i}: ${error.message}`);
+    }
+
+    console.log(`Created product: ${product.name}`);
+  };
 }
 
 // GET all products
