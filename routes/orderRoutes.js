@@ -2,72 +2,104 @@ import { Router } from 'express';
 import { Order } from '../models/order.js';
 const router = Router();
 
-// Create new orders
-// createOrder();
-async function createOrder() {
-    try {
-        Order.collection.drop()
-        const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
-        const monthData = (await (Bun.file("data/monthData.txt").text())).split("\n");
+// Utility function to get a random number in interval
+const rndNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;
 
-        for (let i = 0; i < 50; i++) { // Change x in i < x to the number of orders you want to create
-            const randomNum = Math.floor(Math.random() * 1000);
-            const randomNameOne = Math.floor(Math.random() * namesData.length);
-            const randomNameTwo = Math.floor(Math.random() * namesData.length);
-            const randomMonth = Math.floor(Math.random() * monthData.length);
-            const randomExec = Math.random() < 0.5; // true or false
-            let boolPacking, boolPicking, boolSending;
+// Utility function to get a random item from an array
+const getRandomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-            if(randomExec == false) {
-              boolPicking = Math.random() < 0.5; // true or false
-              if(boolPicking == true) {
-                boolPacking = Math.random() < 0.5; // true or false
-                if (boolPacking == true) {
-                  boolSending = Math.random() < 0.5; // true or false
-                }
-              }
-            } else {
-              boolPacking = true;
-              boolPicking = true;
-              boolSending = true;
-            }
+// Utility function to generate random products
+const generateRandomProducts = () => ({
+  productName: "product" + rndNum(0, 1000000),
+  quantity: rndNum(0, 30),
+});
 
-            const order = await Order.create({
-                id: (i + 0).toString(),
-                orderNumber: randomNum,
-                orderMonth: monthData[randomMonth],
-                products: [{productName: "product" + randomNum, quantity: randomNum}],
-                picker: namesData[randomNameOne],
-                driver: namesData[randomNameTwo],
-                executed: randomExec,
-                timestamp: [{picking: boolPicking, packing: boolPacking, sending: boolSending}],
-            });
-            console.log(`Created order: ${order.orderNumber}`);
-        }
-    } catch (error) {
-      console.log(error.message);
+// Utility function to generate random order with timestamp based on conditions
+const generateRandomOrder = (id, namesData, monthData) => {
+  const randomNameOne = getRandomItem(namesData);
+  const randomNameTwo = getRandomItem(namesData);
+  const randomMonth = getRandomItem(monthData);
+
+  let boolPicking, boolPacking, boolSending;
+
+  const executed = Math.random() < 0.5;
+
+  if (!executed) {
+    boolPicking = Math.random() < 0.5;
+    if (boolPicking) {
+      boolPacking = Math.random() < 0.5;
+      if (boolPacking) {
+        boolSending = Math.random() < 0.5;
+      }
     }
+  } else {
+    boolPicking = true;
+    boolPacking = true;
+    boolSending = true;
+  }
+
+  return {
+    id: id.toString(),
+    orderNumber: rndNum(0, 10000000),
+    orderMonth: randomMonth,
+    products: [generateRandomProducts(namesData)],
+    picker: randomNameOne,
+    driver: randomNameTwo,
+    executed: executed,
+    timestamp: {
+      picking: boolPicking,
+      packing: boolPacking,
+      sending: boolSending,
+    },
+  };
+};
+
+// Create new order
+// createOrder(50);
+async function createOrder(numOrder) {
+  try {
+    await Order.collection.drop()
+  } catch (error) {
+    console.log(`Failed dropping Order database: ${error.message}`);
+  }
+
+  const namesData = (await (Bun.file("data/nameData.txt").text())).split("\n");
+  const monthData = (await (Bun.file("data/monthData.txt").text())).split("\n");
+
+  // Create new employe loop
+  for (let i = 0; i < numOrder; i++) {
+    const orderData = generateRandomOrder(i, namesData, monthData);
+
+    let order;
+    try {
+      order = await Order.create(orderData);
+    } catch (error) {
+      console.log(`Could not create order ${i}: ${error.message}`);
+    }
+
+    console.log(`Created order: ${order.orderNumber}`);
+  };
 }
 
 // GET all orders
 router.get('/', async (req, res) => {
-    try {
-      const order = await Order.find();
-      res.json(order);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
+  try {
+    const order = await Order.find();
+    res.json(order);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 // GET all false order picking status
 router.get('/timestamp/picking', async (req, res) => {
   try {
-      const orderPicked = await Order.find({
-          'timestamp.picking': 'false',
-      });
-      res.json(orderPicked);
+    const orderPicked = await Order.find({
+      'timestamp.picking': 'false',
+    });
+    res.json(orderPicked);
   } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
@@ -78,7 +110,7 @@ router.get('/timestamp/picking/oldest', async (req, res) => {
       'timestamp.picking': true,
       executed: false,
     }).sort({ _id: 1 });
-    
+
     res.json(oldestPickedOrder);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -89,7 +121,7 @@ router.get('/timestamp/picking/oldest', async (req, res) => {
 router.get('/picker/no-orders', async (req, res) => {
   try {
     const pickersWithNoOrders = await Order.distinct('picker', {
-      executed: false, 
+      executed: false,
     });
     res.json(pickersWithNoOrders);
   } catch (error) {
